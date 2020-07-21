@@ -14,6 +14,8 @@ local function normalizeparams(params)
 		for i=1, params.n do
 			params[i] = "param_"..tostring(i)
 		end
+  elseif type(params)=="string" then
+    params = { params, n=1 }
 	elseif type(params)=="nil" then
 		params = {n = 0}
 	else
