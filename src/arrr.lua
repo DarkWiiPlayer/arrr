@@ -96,6 +96,7 @@ local function parser(descriptors)
 					index = handle_command(data, token, list, index, descriptor)
 				end
 			else
+        table.insert(data, current)
 			end
 		end
 		return data
