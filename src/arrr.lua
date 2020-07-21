@@ -65,6 +65,9 @@ local function handle_command(data, token, list, start, descriptor)
 		else
 			data[descriptor.name] = result
 		end
+  else
+    -- Insert as a positional argument so it can maybe be parsed later on
+    table.insert(data, token)
 	end
 	return start
 end
