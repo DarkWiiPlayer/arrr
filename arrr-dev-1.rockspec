@@ -4,6 +4,7 @@ source = {
    url = "git+https://github.com/darkwiiplayer/arrr",
 }
 description = {
+	summary = "A minimalistic commandline argument parser for Lua",
    homepage = "https://github.com/darkwiiplayer/arrr",
    license = "Public Domain"
 }
