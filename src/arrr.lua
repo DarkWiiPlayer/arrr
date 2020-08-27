@@ -14,8 +14,8 @@ local function normalizeparams(params)
 		for i=1, params.n do
 			params[i] = "param_"..tostring(i)
 		end
-  elseif type(params)=="string" then
-    params = { params, n=1 }
+	elseif type(params)=="string" then
+		params = { params, n=1 }
 	elseif type(params)=="nil" then
 		params = {n = 0}
 	else
@@ -67,9 +67,9 @@ local function handle_command(data, token, list, start, descriptor)
 		else
 			data[descriptor.name] = result
 		end
-  else
-    -- Insert as a positional argument so it can maybe be parsed later on
-    table.insert(data, token)
+	else
+		-- Insert as a positional argument so it can maybe be parsed later on
+		table.insert(data, token)
 	end
 	return start
 end
@@ -101,11 +101,10 @@ local function parser(descriptors)
 					index = handle_command(data, token, list, index, descriptor)
 				end
 			else
-        table.insert(data, current)
+				table.insert(data, current)
 			end
 		end
-		return data
-	end
+		return data end
 end
 
 return parser
