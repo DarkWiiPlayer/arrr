@@ -58,8 +58,11 @@ local function handle_command(data, token, list, start, descriptor)
 			result = list[start]
 			start = start + 1
 		else
-			for i=start,start+descriptor.params.n-1 do
+			result = {}
+			for i=1,descriptor.params.n do
+				result[descriptor.params[i]] = list[start+i-1]
 			end
+			start = start+descriptor.params.n
 		end
 
 		if descriptor.filter then
