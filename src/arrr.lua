@@ -43,6 +43,7 @@ local function parse(descriptors)
 
 		if long then register[long] = current end
 		if short then register[short] = current end
+		table.insert(register, current)
 	end
 	return register
 end
@@ -77,6 +78,11 @@ local function handle_command(data, token, list, start, descriptor)
 	return start
 end
 
+local __parser = {}
+function __parser:__call(...)
+	return self:parse(...)
+end
+
 --- Returns a new commandline parser built from a param list.
 -- @usage
 -- 	local parser = arrr {
@@ -86,9 +92,9 @@ end
 -- 	
 -- 	local data = arrr {'--foo', 'bar', '--bar', 'hello', '-abc', 'baz'}
 local function parser(descriptors)
-	local register = parse(descriptors)
+	local register = setmetatable(parse(descriptors), __parser)
 
-	return function(list)
+	function register:parse(list)
 		local data = {}
 		local index = 1
 		while index <= #list do
@@ -96,18 +102,21 @@ local function parser(descriptors)
 			index = index + 1
 			if current:find '^%-%-%a+$' then
 				local token = current:sub(3)
-				local descriptor = register[token]
+				local descriptor = self[token]
 				index = handle_command(data, token, list, index, descriptor)
 			elseif current:find '^%-' then
 				for token in current:sub(2):gmatch(".") do
-					local descriptor = register[token]
+					local descriptor = self[token]
 					index = handle_command(data, token, list, index, descriptor)
 				end
 			else
 				table.insert(data, current)
 			end
 		end
-		return data end
+		return data
+	end
+
+	return register
 end
 
 return parser
