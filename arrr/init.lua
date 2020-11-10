@@ -50,7 +50,7 @@ end
 
 --- Handles a command
 -- @treturn Number the position of the first unhandled element in the list
-local function handle_command(data, token, list, start, descriptor)
+local function handle_command(data, token, list, start, descriptor, raw)
 	local result
 	if descriptor then
 		if descriptor.params.n == 0 then
@@ -73,7 +73,7 @@ local function handle_command(data, token, list, start, descriptor)
 		end
 	else
 		-- Insert as a positional argument so it can maybe be parsed later on
-		table.insert(data, token)
+		table.insert(data, raw)
 	end
 	return start
 end
@@ -103,11 +103,11 @@ local function parser(descriptors)
 			if current:find '^%-%-%a+$' then
 				local token = current:sub(3)
 				local descriptor = self[token]
-				index = handle_command(data, token, list, index, descriptor)
+				index = handle_command(data, token, list, index, descriptor, current)
 			elseif current:find '^%-' then
 				for token in current:sub(2):gmatch(".") do
 					local descriptor = self[token]
-					index = handle_command(data, token, list, index, descriptor)
+					index = handle_command(data, token, list, index, descriptor, "-"..token)
 				end
 			else
 				table.insert(data, current)
