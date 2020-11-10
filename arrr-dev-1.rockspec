@@ -11,6 +11,6 @@ description = {
 build = {
    type = "builtin",
    modules = {
-      arrr = "src/arrr.lua",
+      arrr = "arrr/init.lua",
    }
 }
