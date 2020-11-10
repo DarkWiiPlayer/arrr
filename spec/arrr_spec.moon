@@ -16,6 +16,7 @@ describe 'arrr', ->
 				{ "Moo", "--moo",  nil, 'param' }
 				{ "Zoo", "--zoo",  nil, { 'param' } }
 				{ "Boo", "--boo",  nil, { 'duck', 'russian_spy' } }
+				{ "Var", "--var",  nil, '*' }
 			}
 
 		it 'parses flags as booleans', ->
@@ -67,3 +68,7 @@ describe 'arrr', ->
 		it 'should stop parsing after double dash', ->
 			assert.same { foo: "foo", "bar", "--baz" },
 				handler { "--foo", "foo", "bar", "--", "--baz" }
+
+		it 'parses variable argument lists for "*"', ->
+			assert.same { foo: "foo", var: { "first", "second", "third" } },
+				handler { "--var", "first", "second", "third", "--foo", "foo" }

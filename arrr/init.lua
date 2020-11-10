@@ -38,6 +38,16 @@ local function handle_command(data, token, list, start, descriptor, raw)
 		local params = descriptor.params
 		if type(params) == "nil" then
 			result = true
+		elseif params == '*' then
+			result = {}
+			for i=1,math.huge do
+				if not list[start]:find("^-") then
+					result[i] = list[start]
+					start = start+1
+				else
+					break
+				end
+			end
 		elseif type(params) == "string" then
 			result = list[start]
 			start = start + 1
