@@ -12,7 +12,7 @@ local function normalizeparams(params)
 	if type(params)=="number" then
 		params = {n = params}
 		for i=1, params.n do
-			params[i] = "param_"..tostring(i)
+			params[i] = i
 		end
 	elseif type(params)=="string" then
 		params = { params, n=1 }
