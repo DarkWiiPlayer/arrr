@@ -100,7 +100,12 @@ local function parser(descriptors)
 		while index <= #list do
 			local current = list[index]
 			index = index + 1
-			if current:find '^%-%-%a+$' then
+			if current == '--' then
+				for i = index, #list do
+					table.insert(data, list[i])
+				end
+				return data
+			elseif current:find '^%-%-%a+$' then
 				local token = current:sub(3)
 				local descriptor = self[token]
 				index = handle_command(data, token, list, index, descriptor, current)
