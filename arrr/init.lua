@@ -6,24 +6,6 @@
 -- 	local arrr = require 'arrr'
 -- 	parser = arrr { {"Foos a bar", "--foo", "-f", {'bar'}} }
 
---- Normalizes a parameter list for an argument.
--- It always adds an `n` element containing the length.
-local function normalizeparams(params)
-	if type(params)=="number" then
-		params = {n = params}
-		for i=1, params.n do
-			params[i] = i
-		end
-	elseif type(params)=="string" then
-		params = { params, n=1 }
-	elseif type(params)=="nil" then
-		params = {n = 0}
-	else
-		params.n = #params
-	end
-	return params
-end
-
 --- Parses a list of argument descriptors.
 -- The format is: `{Description, Longhand, Shorthand, parameters, filter}`.
 -- All members except the longhand can be nil.
@@ -35,9 +17,9 @@ local function parse(descriptors)
 			descriptor[3] and descriptor[3]:gsub('^%-', '')
 
 		local current = {
-			description = descriptor[1];
-			params = normalizeparams(descriptor[4]);
 			name = long;
+			description = descriptor[1];
+			params = descriptor[4];
 			filter = descriptor[5]
 		}
 
@@ -53,17 +35,24 @@ end
 local function handle_command(data, token, list, start, descriptor, raw)
 	local result
 	if descriptor then
-		if descriptor.params.n == 0 then
+		local params = descriptor.params
+		if type(params) == "nil" then
 			result = true
-		elseif descriptor.params.n == 1 then
+		elseif type(params) == "string" then
 			result = list[start]
 			start = start + 1
-		else
+		elseif type(params) == "number" then
 			result = {}
-			for i=1,descriptor.params.n do
-				result[descriptor.params[i]] = list[start+i-1]
+			for i=1,params do
+				result[i] = list[start+i-1]
 			end
-			start = start+descriptor.params.n
+			start = start+params
+		elseif type(params) == "table" then
+			result = {}
+			for i=1,#params do
+				result[params[i]] = list[start+i-1]
+			end
+			start = start+#params
 		end
 
 		if descriptor.filter then

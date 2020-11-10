@@ -10,10 +10,11 @@ describe 'arrr', ->
 		before_each ->
 			export handler = arrr {
 				{ "Flag", "--flag" }
-				{ "Foo", "--foo", "-f", 1 }
-				{ "Bar", "--bar", "-b", 1 }
+				{ "Foo", "--foo", "-f", 'foo' }
+				{ "Bar", "--bar", "-b", 'bar' }
 				{ "Baz", "--baz",  nil, 2 }
 				{ "Moo", "--moo",  nil, 'param' }
+				{ "Zoo", "--zoo",  nil, { 'param' } }
 				{ "Boo", "--boo",  nil, { 'duck', 'russian_spy' } }
 			}
 
@@ -24,16 +25,26 @@ describe 'arrr', ->
 			assert.same { foo: "Foo", bar: "Bar" },
 				handler { "--foo", 'Foo', "--bar", 'Bar' }
 
-		it 'names multiparams automatically', ->
-			assert.same { baz: {"bzzz", "brrr"} },
-				handler { "--baz", "bzzz", "brrr" }
+		it 'parses short arguments', ->
+			assert.same { foo: "Foo", bar: "Bar" },
+				handler { "-f", 'Foo', "-b", 'Bar' }
+
+		it 'parses combined short arguments', ->
+			assert.same { foo: "Foo", bar: "Bar" },
+				handler { "-fb", 'Foo', 'Bar' }
 
 		it 'ignores single param names', ->
 			-- These are just for documentation purposes!
 			assert.same { moo: "oom" },
 				handler { "--moo", "oom" }
 
+		it 'collect multiparams automatically', ->
+			assert.same { baz: {"bzzz", "brrr"} },
+				handler { "--baz", "bzzz", "brrr" }
+
 		it 'uses given multiparams names', ->
+			assert.same { zoo: { param: "kvak" } },
+				handler { "--zoo", "kvak" }
 			assert.same { boo: { duck: "quack", russian_spy: "kvak" } },
 				handler { "--boo", "quack", "kvak" }
 
