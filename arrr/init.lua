@@ -117,7 +117,6 @@ end
 -- 	local data = arrr {'--foo', 'bar', '--bar', 'hello', '-abc', 'baz'}
 local function parser(descriptors)
 	local register = setmetatable(parse(descriptors), __parser)
-	register.evaluate = evaluate
 	return register
 end
 
