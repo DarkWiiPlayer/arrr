@@ -1,3 +1,4 @@
+package.path = '?/init.lua;' .. package.path
 arrr = require 'arrr'
 
 describe 'arrr', ->
