@@ -7,7 +7,7 @@
 -- 	parser = arrr { {"Foos a bar", "--foo", "-f", 'bar'} }
 
 --- Parses a list of argument descriptors.
--- The format is: `{Description, Longhand, Shorthand, parameters, filter}`.
+-- The format is: `{Description, Longhand, Shorthand, parameters, repeatable}`.
 -- All members except the longhand can be nil.
 local function parse(descriptors)
 	local register = {}
@@ -16,7 +16,7 @@ local function parse(descriptors)
 			name = descriptor[2]:gsub("^%-%-", '');
 			description = descriptor[1];
 			params = descriptor[4];
-			filter = descriptor[5]
+			repeatable = descriptor[5]
 		}
 
 		if descriptor[2] then register[descriptor[2]] = current end
@@ -62,7 +62,14 @@ local function handle_command(data, token, list, start, descriptor)
 		end
 
 		if descriptor.filter then
-			data[descriptor.name] = descriptor.filter(result)
+			result = descriptor.filter(result)
+		else
+			result = result
+		end
+
+		if descriptor.repeatable then
+			data[descriptor.name] = data[descriptor.name] or {}
+			table.insert(data[descriptor.name], result)
 		else
 			data[descriptor.name] = result
 		end

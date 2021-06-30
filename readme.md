@@ -26,7 +26,7 @@ Structure of an argument description:
 		- Number to collect that many arguments in a sequence
 		- Array of keys to collect arguments into a table
 		- An Asterisk * for a variable length of arguments that don't start with -
-	- Filter function
+	- Whether or not the argument is repeatable
 
 Long argument names work as expected. Short ones can be combined into one, and
 if they take arguments, they will be read in order:
