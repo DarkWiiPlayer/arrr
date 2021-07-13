@@ -44,7 +44,7 @@ local function handle_command(data, token, list, start, descriptor)
 					break
 				end
 			end
-		elseif type(params) == "string" then
+		elseif type(params) == "string" or type(params) == true then
 			result = list[start]
 			start = start + 1
 		elseif type(params) == "number" then
