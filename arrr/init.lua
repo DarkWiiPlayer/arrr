@@ -11,7 +11,7 @@
 -- All members except the longhand can be nil.
 local function parse(descriptors)
 	local register = {}
-	for i, descriptor in ipairs(descriptors) do
+	for _, descriptor in ipairs(descriptors) do
 		local current = {
 			name = descriptor[2]:gsub("^%-%-", '');
 			description = descriptor[1];
@@ -105,10 +105,10 @@ function __parser.__index:evaluate(list)
 			local descriptor = self[current]
 			index = handle_command(data, current, list, index, descriptor)
 		elseif current:find '^%-%a+$' then
-			for current in current:sub(2):gmatch(".") do
-				current = '-'..current
-				local descriptor = self[current]
-				index = handle_command(data, current, list, index, descriptor)
+			for new in current:sub(2):gmatch(".") do
+				new = '-'..new
+				local descriptor = self[new]
+				index = handle_command(data, new, list, index, descriptor)
 			end
 		else
 			table.insert(data, current)
@@ -123,7 +123,7 @@ end
 -- 		{ "Foos a bar", "--foo", "-f", {'bar'} };
 -- 		{ "Foos a bar", "--bar", "-b", {'bar'} };
 -- 	}
--- 	
+--
 -- 	local data = arrr {'--foo', 'bar', '--bar', 'hello', '-abc', 'baz'}
 local function parser(descriptors)
 	local register = setmetatable(parse(descriptors), __parser)
