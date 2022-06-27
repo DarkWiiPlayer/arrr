@@ -49,4 +49,5 @@ should the callback return a truthy value.
 	parser { "--unknown" } -- returns { "unknown" }
 
 At any position where a new argument is expected, a `--` will immediately stop
-parsing arguments and return all following arguments unmodified.
+parsing arguments and return all following arguments unmodified as positional
+arguments.
