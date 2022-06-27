@@ -86,7 +86,10 @@ function __parser:__call(...)
 	return self:evaluate(...)
 end
 
---- Evaluates a chain of arguments
+--- Evaluates a chain of arguments.
+-- Known arguments (and their parameters) will be read into string keys.
+-- Extra arguments will be read into ascending integer keys.
+-- A single `--` causes the parser to abort and read all remaining elements into integer keys.
 function __parser.__index:evaluate(list)
 	local data = {}
 	local index = 1
