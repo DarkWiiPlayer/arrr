@@ -37,5 +37,16 @@ if they take arguments, they will be read in order:
 Unknown arguments and extra positional arguments will simply be returned at
 integer positions.
 
+Setting the `unknown` field on a parser to a callback will make it call its
+value for every unknown parameter that it encounters and drop the parameter,
+should the callback return a truthy value.
+
+	local parser = arrr { --[[ parses nothing ]] }
+	function parser.unknown(token, data)
+		table.insert(data, token:gsub("^--?", "")) -- Remove leading dash(es)
+		return true -- Drop the parameter, because it was already handled
+	end
+	parser { "--unknown" } -- returns { "unknown" }
+
 At any position where a new argument is expected, a `--` will immediately stop
 parsing arguments and return all following arguments unmodified.

@@ -28,7 +28,7 @@ end
 
 --- Handles a command
 -- @treturn Number the position of the first unhandled element in the list
-local function handle_command(data, token, list, start, descriptor)
+local function handle_command(data, token, list, start, descriptor, unknown_callback)
 	local result
 	if descriptor then
 		local params = descriptor.params
@@ -74,8 +74,11 @@ local function handle_command(data, token, list, start, descriptor)
 			data[descriptor.name] = result
 		end
 	else
-		-- Insert as a positional argument so it can maybe be parsed later on
-		table.insert(data, token)
+		-- Run callback if there is one
+		if not (unknown_callback and unknown_callback(token, data)) then
+			-- Insert as a positional argument so it can maybe be parsed later on
+			table.insert(data, token)
+		end
 	end
 	return start
 end
@@ -103,12 +106,12 @@ function __parser.__index:evaluate(list)
 			return data
 		elseif current:find '^%-%-%a+$' then
 			local descriptor = self[current]
-			index = handle_command(data, current, list, index, descriptor)
+			index = handle_command(data, current, list, index, descriptor, self.unknown)
 		elseif current:find '^%-%a+$' then
 			for new in current:sub(2):gmatch(".") do
 				new = '-'..new
 				local descriptor = self[new]
-				index = handle_command(data, new, list, index, descriptor)
+				index = handle_command(data, new, list, index, descriptor, self.unknown)
 			end
 		else
 			table.insert(data, current)
