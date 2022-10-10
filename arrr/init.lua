@@ -16,7 +16,9 @@ local function parse(descriptors)
 			name = descriptor[2]:gsub("^%-%-", '');
 			description = descriptor[1];
 			params = descriptor[4];
-			repeatable = descriptor[5]
+			repeatable = descriptor[5];
+			long = descriptor[2];
+			short = descriptor[3];
 		}
 
 		if descriptor[2] then register[descriptor[2]] = current end
@@ -25,6 +27,15 @@ local function parse(descriptors)
 	end
 	return register
 end
+
+--- Argument descriptor
+-- @table Argument
+-- @tfield string name The name of the parameter without dashes
+-- @tfield string long The long form of the parameter
+-- @tfield string short The short form of the parameter if present
+-- @tfield string description
+-- @field params The parameter(s) of the argument
+-- @tfield boolean repeatable Whether the argument should be collected into a table
 
 --- Handles a command
 -- @treturn Number the position of the first unhandled element in the list
