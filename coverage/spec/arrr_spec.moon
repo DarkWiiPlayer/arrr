@@ -31,15 +31,15 @@
           
 <ul class="inline-list">
   <li>
-    <span class="strong">80.49%</span>
+    <span class="strong">80.23%</span>
     <span class="quiet">Rate</span>
   </li>
   <li>
-    <span class="strong">66</span>
+    <span class="strong">69</span>
     <span class="quiet">Hits</span>
   </li>
   <li>
-    <span class="strong">16</span>
+    <span class="strong">17</span>
     <span class="quiet">Missed</span>
   </li>
 </ul>
@@ -156,6 +156,11 @@
         <li>102</li>
         <li>103</li>
         <li>104</li>
+        <li>105</li>
+        <li>106</li>
+        <li>107</li>
+        <li>108</li>
+        <li>109</li>
     </ul>
 
     <ul class="line-coverages undecorated">
@@ -171,85 +176,85 @@
 </li>
         <li class="line-hit">2x</li>
         <li class="line-hit">2x</li>
-        <li class="line-hit">36x</li>
+        <li class="line-hit">38x</li>
         <li class="line-miss">
 </li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-hit">18x</li>
-        <li class="line-hit">18x</li>
-        <li class="line-empty">
-</li>
-        <li class="line-empty">
-</li>
-        <li class="line-miss">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-empty">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-empty">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-hit">18x</li>
-        <li class="line-hit">18x</li>
-        <li class="line-empty">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-empty">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-empty">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-empty">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-empty">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-hit">18x</li>
-        <li class="line-empty">
-</li>
-        <li class="line-miss">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-empty">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-empty">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-miss">
-</li>
-        <li class="line-hit">18x</li>
-        <li class="line-hit">36x</li>
         <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-hit">19x</li>
+        <li class="line-hit">19x</li>
+        <li class="line-empty">
+</li>
+        <li class="line-empty">
+</li>
+        <li class="line-miss">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-hit">19x</li>
+        <li class="line-hit">19x</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-hit">19x</li>
+        <li class="line-empty">
+</li>
+        <li class="line-miss">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-miss">
+</li>
+        <li class="line-hit">19x</li>
+        <li class="line-hit">38x</li>
+        <li class="line-hit">20x</li>
         <li class="line-hit">2x</li>
         <li class="line-empty">
 </li>
@@ -301,6 +306,13 @@
         <li class="line-hit">1x</li>
         <li class="line-hit">1x</li>
         <li class="line-hit">2x</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">1x</li>
+        <li class="line-hit">2x</li>
+        <li class="line-hit">1x</li>
+        <li class="line-miss">
+</li>
     </ul>
 
     <ul class="code undecorated">
@@ -428,6 +440,12 @@
         <li class="line-hit">		it &#39;aborts on double dash&#39;, -&gt;</li>
         <li class="line-hit">			assert.same { foo: &#39;foo&#39;, &#39;bar&#39;, &#39;--baz&#39; },</li>
         <li class="line-hit">				handler { &#39;--foo&#39;, &#39;foo&#39;, &#39;--&#39;, &#39;bar&#39;, &#39;--baz&#39; }</li>
+        <li class="line-empty">
+</li>
+        <li class="line-hit">		it &#39;parses arguments with dashes&#39;, -&gt;</li>
+        <li class="line-hit">			long = arrr { { &quot;Long argument&quot;, &quot;--foo-bar&quot;, nil, &quot;Foo Bar&quot; } }</li>
+        <li class="line-hit">			assert.same { &#39;foobar&#39;: &#39;Hello, World!&#39; },</li>
+        <li class="line-miss">				long { &#39;--foo-bar&#39;, &#39;Hello, World!&#39; }</li>
     </ul>
 
   </section>
@@ -436,7 +454,7 @@
       </main>
 
       <footer class="quiet">
-        Code coverage generated by <a href="https://keplerproject.github.io/luacov/" target="_blank">LuaCov</a> at 2022-11-25 11:43:39
+        Code coverage generated by <a href="https://keplerproject.github.io/luacov/" target="_blank">LuaCov</a> at 2022-11-25 12:54:40
       </footer>
     </div>
   </body>
