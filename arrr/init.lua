@@ -13,7 +13,7 @@ local function parse(descriptors)
 	local register = {}
 	for _, descriptor in ipairs(descriptors) do
 		local current = {
-			name = descriptor[2]:gsub("^%-%-", '');
+			name = descriptor[2]:gsub("^%-%-", ''):gsub("-", "");
 			description = descriptor[1];
 			params = descriptor[4];
 			repeatable = descriptor[5];
@@ -115,7 +115,7 @@ function __parser.__index:evaluate(list)
 				table.insert(data, list[i])
 			end
 			return data
-		elseif current:find '^%-%-%a+$' then
+		elseif current:find '^%-%-.+$' then
 			local descriptor = self[current]
 			index = handle_command(data, current, list, index, descriptor, self.unknown)
 		elseif current:find '^%-%a+$' then

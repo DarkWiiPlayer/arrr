@@ -102,3 +102,8 @@ describe 'arrr', ->
 		it 'aborts on double dash', ->
 			assert.same { foo: 'foo', 'bar', '--baz' },
 				handler { '--foo', 'foo', '--', 'bar', '--baz' }
+
+		it 'parses arguments with dashes', ->
+			long = arrr { { "Long argument", "--foo-bar", nil, "Foo Bar" } }
+			assert.same { 'foobar': 'Hello, World!' },
+				long { '--foo-bar', 'Hello, World!' }
