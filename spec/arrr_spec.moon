@@ -10,17 +10,15 @@ describe 'arrr', ->
 		before_each ->
 			export handler = arrr {
 				{ 'Flag', '--flag' }
-				{ 'Foo', '--foo', '-f', 'foo' }
-				{ 'Bar', '--bar', '-b', 'bar' }
+				{ 'Foo', '--foo', '-f', true }
+				{ 'Bar', '--bar', '-b', true }
 				{ 'Baz', '--baz',  nil, 2 }
-				{ 'Moo', '--moo',  nil, 'param' }
+				{ 'Moo', '--moo',  nil, true }
 				{ 'Zoo', '--zoo',  nil, { 'param' } }
 				{ 'Boo', '--boo',  nil, { 'duck', 'russian_spy' } }
 				{ 'Var', '--var',  nil, '*' }
+				{ 'Del', '--del',  nil, '--' }
 			}
-
-		it 'parses flags as booleans', ->
-			assert.same { flag: true }, handler { '--flag' }
 
 		it 'parses long arguments', ->
 			assert.same { foo: 'Foo', bar: 'Bar' },
@@ -38,6 +36,9 @@ describe 'arrr', ->
 			-- These are just for documentation purposes!
 			assert.same { moo: 'oom' },
 				handler { '--moo', 'oom' }
+
+		it 'parses flags as booleans', ->
+			assert.same { flag: true }, handler { '--flag' }
 
 		it 'collect multiparams automatically', ->
 			assert.same { baz: {'bzzz', 'brrr'} },
@@ -91,19 +92,31 @@ describe 'arrr', ->
 			assert.same { '-X', '-Z', foo: 'test' },
 				handler { '-XfZ', 'test' }
 
-		it 'should stop parsing after double dash', ->
-			assert.same { foo: 'foo', 'bar', '--baz' },
-				handler { '--foo', 'foo', 'bar', '--', '--baz' }
-
 		it 'parses variable argument lists for "*"', ->
 			assert.same { foo: 'foo', var: { 'first', 'second', 'third' } },
 				handler { '--var', 'first', 'second', 'third', '--foo', 'foo' }
+
+		it 'accepts delimiter parameters', ->
+			assert.same { del: { "a", "b", "c" }, "bar", "baz" },
+				handler { "--del", "a", "b", "c", "--", "bar", "--", "baz" }
 
 		it 'aborts on double dash', ->
 			assert.same { foo: 'foo', 'bar', '--baz' },
 				handler { '--foo', 'foo', '--', 'bar', '--baz' }
 
+		it 'filters single arguments', ->
+			parse = arrr { { "Filtered", "--filtered", nil, true, filter: => @upper! } }
+			assert.same { filtered: "VALUE" },
+				parse { "--filtered", "value" }
+
+		it 'filters tables as a whole', ->
+			parse = arrr {
+				{ "Array", "--filtered1", nil, 3, filter: => assert.is.table @ }
+				{ "Map", "--filtered2", nil, {"foo", "bar"}, filter: => assert.is.table @ }
+			}
+			parse { "--filtered1", "a", "b", "c", "--filtered2", 1, 2 }
+
 		it 'parses arguments with dashes', ->
-			long = arrr { { "Long argument", "--foo-bar", nil, "Foo Bar" } }
+			long = arrr { { "Long argument", "--foo-bar", nil, true } }
 			assert.same { 'foobar': 'Hello, World!' },
 				long { '--foo-bar', 'Hello, World!' }

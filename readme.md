@@ -22,11 +22,18 @@ Structure of an argument description:
 	- Short name (can be nil for none)
 	- Argument count or names
 		- Nil for a boolean flag
-		- A string for single argument
+		- True for single argument
 		- Number to collect that many arguments in a sequence
 		- Array of keys to collect arguments into a table
 		- An Asterisk * for a variable length of arguments that don't start with -
-	- Whether or not the argument is repeatable
+		- A delimiter string to read arguments until it matches
+
+Additionally, the following options can be passed in the argument descriptor as
+string keys:
+
+	- `filter` A function to filter the argument through
+	- `repeatable` Makes it so the flag can be given multiple times and collects
+	  its values into a sequence
 
 Long argument names work as expected. Short ones can be combined into one, and
 if they take arguments, they will be read in order:

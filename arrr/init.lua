@@ -16,9 +16,10 @@ local function parse(descriptors)
 			name = descriptor[2]:gsub("^%-%-", ''):gsub("-", "");
 			description = descriptor[1];
 			params = descriptor[4];
-			repeatable = descriptor[5];
 			long = descriptor[2];
 			short = descriptor[3];
+			repeatable = descriptor.repeatable;
+			filter = descriptor.filter;
 		}
 
 		if descriptor[2] then register[descriptor[2]] = current end
@@ -55,8 +56,15 @@ local function handle_command(data, token, list, start, descriptor, unknown_call
 					break
 				end
 			end
-		elseif type(params) == "string" or type(params) == true then
+		elseif params == true then
 			result = list[start]
+			start = start + 1
+		elseif type(params) == "string" then
+			result = {}
+			while list[start] and list[start] ~= params do
+				table.insert(result, list[start])
+				start = start + 1
+			end
 			start = start + 1
 		elseif type(params) == "number" then
 			result = {}
