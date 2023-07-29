@@ -95,10 +95,16 @@ describe 'arrr', ->
 		it 'parses variable argument lists for "*"', ->
 			assert.same { foo: 'foo', var: { 'first', 'second', 'third' } },
 				handler { '--var', 'first', 'second', 'third', '--foo', 'foo' }
+			assert.same { var: { 'first', 'second', 'third' } },
+				handler { '--var', 'first', 'second', 'third' }
 
 		it 'accepts delimiter parameters', ->
 			assert.same { del: { "a", "b", "c" }, "bar", "baz" },
 				handler { "--del", "a", "b", "c", "--", "bar", "--", "baz" }
+			assert.same { del: { "a", "b", "c" } },
+				handler { "--del", "a", "b", "c", "--" }
+			assert.same { del: { "a", "b", "c" } },
+				handler { "--del", "a", "b", "c" }
 
 		it 'aborts on double dash', ->
 			assert.same { foo: 'foo', 'bar', '--baz' },

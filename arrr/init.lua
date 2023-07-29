@@ -49,7 +49,7 @@ local function handle_command(data, token, list, start, descriptor, unknown_call
 		elseif params == '*' then
 			result = {}
 			for i=1,math.huge do
-				if not list[start]:find("^-") then
+				if list[start] and not list[start]:find("^-") then
 					result[i] = list[start]
 					start = start+1
 				else
