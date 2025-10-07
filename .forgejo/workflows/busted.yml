@@ -1,0 +1,7 @@
+on: [push]
+jobs:
+  busted:
+    runs-on: amd64
+    steps:
+      - uses: https://git.but.gay/actions/checkout@v4
+      - uses: https://git.but.gay/actions/busted@v2
